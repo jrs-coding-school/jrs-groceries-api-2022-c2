@@ -4,6 +4,7 @@ module.exports = (app) => {
 
     app.get('/api/products', products.getAllProducts);
     app.get('/api/products/:id', products.getProductsById);
+    app.get('/api/products/:category', products.getProductsByCategory)
 
     app.post('/api/products', products.createProduct);
 
