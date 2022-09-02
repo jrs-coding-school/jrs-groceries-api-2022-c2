@@ -1,6 +1,7 @@
 const db = require('../index');
 const { v4: uuid } = require('uuid');
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.getAllUsers = (req, res) => {
     const script = `
@@ -70,30 +71,17 @@ exports.createUser = async (req, res) => {
         });
         return;
     }
-
     const id = uuid();
+    const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
     const script = `
         INSERT INTO users
             (id, email, password)
         VALUES
-        (?, ?, ?);
-        `;
+            (?, ?, ?);
+    `;
 
-    const placeholderValues = [id, email, password];
-
-    try {
-        const hash = await bcrypt.hash(password, 10)
-        await (db.users).insert({ email: email, hash: hash })
-        res.status(200).send({
-            message: 'Password hashed'
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({
-            message: "something went wrong"
-        })
-    }
+    const placeholderValues = [id, email, encryptedPassword];
 
     db.query(script, placeholderValues, (err, results) => {
 
@@ -104,19 +92,59 @@ exports.createUser = async (req, res) => {
             });
             return;
         }
-
         res.send({
             message: "User was created successfully",
             newUserId: id
         });
-
     });
-
 }
 
-exports.updateUser = (req, res) => {
-    res.send({
-        message: "nothing implemented yet"
+exports.updateUser = async (req, res) => {
+    const { id } = req.params
+    const { email, password } = req.body
+
+
+    if (!email || (typeof email != 'string')) {
+        res.status(400).send({
+            message: 'email input is invalid'
+        })
+        return;
+    } else if (!password || (typeof password != 'string')) {
+        res.status(400).send({
+            message: 'password input is invalid'
+        })
+        return;
+    }
+
+    const encryptedPassword = await bcrypt.hash(password, saltRounds);
+
+    const script = `
+        UPDATE users 
+        SET email = ?, password = ? 
+        WHERE id = ?
+    ;`
+
+    const placeholderValues = [email, encryptedPassword, id]
+
+    db.query(script, placeholderValues, (err, results) => {
+        if (err) {
+            res.status(500).send({
+                error: err,
+                message: "There was a problem editing your information"
+            })
+            return
+        } else if (results.affectedRows == 0) {
+            res.status(404).send({
+                message: "No account was updated with that id",
+                id
+            })
+            return;
+        } else {
+            res.send({
+                message: "Your account was updated",
+                id
+            })
+        }
     })
 }
 
@@ -125,10 +153,10 @@ exports.deleteUserById = (req, res) => {
     let { id } = req.params
 
     const script = `
-DELETE
-FROM users
-WHERE id = ?
-`
+        DELETE
+        FROM users
+        WHERE id = ?
+    `
 
     const placeholderValues = [id];
 
@@ -150,6 +178,4 @@ WHERE id = ?
             })
         }
     })
-
-
 }
