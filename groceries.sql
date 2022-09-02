@@ -76,6 +76,8 @@ VALUES
     (102,'2 % Milk', 2.16, 'Dairy & Eggs', '0.5 Gallon', 'Great Value', 'Grade A  1/2 gallon of 2% milk', 'https://i5.walmartimages.com/asr/670fdbc0-a12a-493e-a0d1-5e1fff84e200_1.c1a08125c47d543ab975f0c484225aaa.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (103,'Whole Milk', 3.62, 'Dairy & Eggs', '1 Gallon', 'Great Value', 'Grade A, Vitamin D enriched whole milk', 'https://i5.walmartimages.com/asr/83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (104,'Whole Milk', 2.16, 'Dairy & Eggs', '0.5 Gallon', 'Great Value', 'Grade A, Vitamin D enriched whole milk', 'https://i5.walmartimages.com/asr/1347c2ba-9373-463d-8714-c678a6949090_2.f72cceb2686f8ea62c4d647f5fa4ee68.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
+    (105,'Salted Butter', 5.48, 'Dairy & Eggs', '1 lb', 'Land O Lakes', "It's the original sweet cream butter made with farm fresh milk that never lets your taste buds down", 'https://i5.walmartimages.com/asr/b9b4f43f-4196-4dff-b57b-95dbb62a3f0b.1c1ada1966c023180cbaffa2e4a8560a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
+    (106,'Large Cage Free Brown Eggs', 3.42, 'Dairy & Eggs', '12ct', 'Marketside', 'When you want a quality product at a great price, choose Marketside Cage Free Large Brown Eggs', 'https://i5.walmartimages.com/asr/b95c5b36-e474-4063-99a8-b7334c965228_1.cdbbf124259b17bbba8e4da078f08c00.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     
   
     -- Fruit(200)
@@ -83,11 +85,16 @@ VALUES
     (202,'Banana', 0.39, 'Fruit', 'Price per unit', 'FWD', 'Grown in Guatemala', 'https://www.instacart.com/image-server/932x932/filters:fill(FFF,true):format(webp)/www.instacart.com/assets/domains/product-image/file/large_d85da0df-7f4a-4a8c-b066-b7bbfd871f70.jpg'),
     (203,'Navel Orange', 0.93, 'Fruit', 'Price per unit', 'FWD', 'Grown in Florida', 'https://i5.walmartimages.com/asr/9a23bac1-8817-4845-b235-36e306bd76a1_1.2f100cb67c81b17a44fedcf1f5d9f9da.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (204,'Strawberries, 1lb', 2.38, 'Fruit', 'Price per package', 'FWD', 'Grown in Mexico', 'https://i5.walmartimages.com/asr/4e7dab6a-c54b-48f7-9bd2-57f5d211501d_1.3ba50bfdf1c7f082056c0f5022edf182.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
+    (205,'Cantaloupe', 2.68, 'Fruit', 'Price per unit', 'FWD', 'Grown in Mexico', 'https://i5.walmartimages.com/asr/57107e37-f5e0-4a96-94c1-bdc57e35a700.561733d0ae224238174cb295a9a35d94.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
+    (206,'Lemon', 0.62, 'Fruit', 'Price per unit', 'FWD', 'Grown in Florida', 'https://i5.walmartimages.com/asr/c87d84c4-081a-475a-8c75-9e7f23a4fbaf.54f94b1123a7b9ca9867f7e51004cbef.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
   
     -- Vegetable(300)
     (301,'English Seedless Cuccumber', 2.77, 'Vegetable', 'Price per unit', 'FWD', 'Grown in Peru', 'https://www.producemarketguide.com/sites/default/files/seedless-cucumber_variety-page.png' ),
     (302,'Red Bell Pepper', 2.29, 'Vegetable', 'Price per unit', 'FWD', 'Grown in Mexico', 'https://i5.walmartimages.com/asr/7be94a8e-9a5d-4f87-842f-5fe4084138ba.c95d36e140f5e0d492ca632b42e4543c.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (303,'Green Cabbage', 2.04, 'Vegetable', 'Price per pound', 'FWD', 'Grown in California', 'https://i5.walmartimages.com/asr/8856d6af-c1b7-4561-9e3d-dd0263fbb09a_1.1ecdda0a8faa0ed27be3f4a87153a0a5.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF' ),
+    (304,'Broccoli Crowns', 2.32, 'Vegetable', 'Price per pound', 'FWD', 'Grown in California', 'https://i5.walmartimages.com/asr/c721459d-3826-4461-9e79-c077d5cf191e_3.ca214f10bb3c042f473588af8b240eca.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF' ),
+    (305,'Romaine Lettuce Hearts', 2.98, 'Vegetable', '3 pk', 'FWD', 'Grown in California', 'https://i5.walmartimages.com/asr/d475f905-b33a-4532-b50f-684f1408cd5f_1.d52e53ac0b69935c2079124ce3ca3036.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF' ),
+    (306,'Green Onions, Bunch', 0.48, 'Vegetable', 'Price per unit', 'FWD', 'Grown in California', 'https://i5.walmartimages.com/asr/5af56fe3-27ea-4c78-9d3f-74f0fdecfcff_1.1f4e7886b6e329ccb374d9e3fa675e45.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF' ),
   
     -- Meat & Seafood(400)
     (401,'Chicken Breast', 12.29, 'Meat & Seafood', 'Price per package', "Pilgrim's", 'Boneless, Skinless, Grade A Chicken Breast', 'https://partners.pilgrimsusa.com/media/1318/152829_skless_breast_tray3_Packaged%20Image.png'),
@@ -110,7 +117,7 @@ VALUES
     (703,'AHA Sparkling Water, Watermelon + Lime', 3.38, 'Beverages', '8 x 12 fluid oz bottles', "AHA", "Whether you call it seltzer, carbonated water, or fizzy beverage, AHA's bold flavor pairings offer a unique flavored sparkling water experience unlike all the rest", 'https://i5.walmartimages.com/asr/265ac0f9-393c-424c-976e-b0dfd45ac131.7caf2c2988a97c018c626293a862df11.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
    
     -- Snacks & Candy(800)
-    (801,'Harvest Cheddar Sun Chips', 3.93, 'Snacks & Candy', '7 oz bag', 'Sun Chips', 'The flavor of real cheddar cheese is layered onto a delicious whole grain chip to create this tasty combination.','https://images.eatthismuch.com/img/441232_kyims_fa200844-c32a-49da-a671-8c6d6262288a.jpeg'),
+    (801,'Harvest Cheddar Sun Chips', 3.93, 'Snacks & Candy', '7 oz bag', 'Sun Chips', 'The flavor of real cheddar cheese is layered onto a delicious whole grain chip to create this tasty combination.','https://i5.walmartimages.com/asr/f388b632-e225-47b2-9f4b-b388c6ce88aa.6eac267c9ca4eee25d1e225cc121929c.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (802,'Smartfood White Cheddar', 3.68, 'Snacks & Candy', '6.75 oz bag', 'Smartfood', 'White cheddar popcorn so good you will have a hard time stopping snack time','https://i5.walmartimages.com/asr/994bc3b2-b818-45a6-935a-11c3e5664868.b08c2f8be8b5bd73ec493fad5e613fdf.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (803,'Ritz Crackers', 2.68, 'Snacks & Candy', '13.7 oz box', 'Nabisco', 'Flaky and delicious snack crackers with a rich, buttery flavor','https://i5.walmartimages.com/asr/e81f0519-3070-4352-b6cf-815395167489.4fac87c723c0e126517fa3cd032d57f2.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     
@@ -130,12 +137,12 @@ VALUES
     (1103,'Sriracha', 3.62, 'Condiments & Sauces', '17oz', 'Huy Fong', 'Delicious and versatile chili sauce', 'https://i5.walmartimages.com/asr/e40098b0-d901-4f7f-898b-fe56765534d8_1.5873c88d78e5575d04967239db114cd7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     
     -- Canned Goods(1300)
-    (1201,'Chicken Noodle Soup', 1.39, 'Canned Goods', '10.75 oz', "Campbell's", '10.75 ounce can of hearty chicken broth with white chicken meat, noodles, and vegetables','https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/7188jXmgB3L._SL1500_.jpg'),
+    (1201,'Chicken Noodle Soup', 1.39, 'Canned Goods', '10.75 oz', "Campbell's", '10.75 ounce can of hearty chicken broth with white chicken meat, noodles, and vegetables','https://i5.walmartimages.com/asr/1b6212f6-a8cb-4f0e-8342-22ef28ead599.7a93ed034efca03d14769e9117a79059.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (1202,'Crushed Tomatoes', 2.18, 'Canned Goods', '28 oz', "Cento", 'Cento All Purpose Crushed Tomatoes are made with vine-ripened tomatoes. They are picked and processed quickly in order to preserve their fresh flavor','https://i5.walmartimages.com/asr/00c1107f-0181-4de8-bf96-54723d808e75_1.f31fe920f47eb06345974b6f2a1e368a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (1203,'Sliced Peaches', 2.28, 'Canned Goods', '15 oz', "Del Monte", 'One 15 oz can of DEL MONTE Yellow Cling Sliced Peaches in 100% Juice','https://i5.walmartimages.com/asr/304c61b4-7cb8-44d7-ada9-240da2210029.d5268e52ad41c35392615a8bd0f09652.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     
     -- Household(1300)
-    (1301,'Disinfecting Wipes', 4.20, 'Household', '80 wipes', 'Lysol', 'Lysol Disinfecting Wipes can be used as a convenient way to clean and disinfect your household surfaces. Each pre-moistened disposable disinfecting wipe kills 99.9% of germs when used as directed', 'https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/71UupLCWc6S._AC_SL1500_.jpg'),
+    (1301,'Disinfecting Wipes', 4.20, 'Household', '80 wipes', 'Lysol', 'Lysol Disinfecting Wipes can be used as a convenient way to clean and disinfect your household surfaces. Each pre-moistened disposable disinfecting wipe kills 99.9% of germs when used as directed', 'https://i5.walmartimages.com/asr/0491c0a8-642e-4da2-a9bf-52171845c39a.198a21e203ab556ab3ee43f0d99568d4.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (1302,'Febreze Air Freshener', 5.44, 'Household', '2 pk of 8.8 fluid oz', 'Febreze', 'Eliminates air odors without masking, leaving nothing behind but a light, fresh scent', 'https://i5.walmartimages.com/asr/4a5eaa4e-2b21-4120-9527-9642d5e36571.defcc66820dda66ada4177dadf783b13.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (1303,'Cottonelle Ultra Comfort Toilet Paper', 6.98, 'Household', '6 pk', 'Cottonelle', '6 Mega Rolls of Cottonelle Ultra Comfort Toilet Paper (6 Mega Rolls = 24 regular rolls*), 268 sheets per roll—packaging may vary from what is shown.', 'https://i5.walmartimages.com/asr/c7308c82-20bf-4fe5-9e8a-d2a2824f8578.0a0223787228388662d259785d0b5e5d.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     
