@@ -55,6 +55,35 @@ exports.getUserById = (req, res) => {
     })
 }
 
+exports.getUserByEmail = (req, res) => {
+
+    const { email } = req.params
+
+    const script = `
+        SELECT *
+        FROM users
+        WHERE email = ?
+    `
+
+    const placeholderValues = [email];
+
+    db.query(script, placeholderValues, (err, results) => {
+        if (err) {
+            res.status(500).send({
+                error: err,
+                message: 'There was a problem finding this user, please try again'
+            })
+        } else if (results.length == 0) {
+            res.status(404).send({
+                error: err,
+                message: 'There was no user at this id, please input a valid id'
+            })
+        } else {
+            res.send(results[0])
+        }
+    })
+}
+
 exports.createUser = async (req, res) => {
 
     const { email, password } = req.body

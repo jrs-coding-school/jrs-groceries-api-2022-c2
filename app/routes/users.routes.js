@@ -4,6 +4,7 @@ module.exports = (app) => {
 
     app.get('/api/users', users.getAllUsers);
     app.get('/api/users/:id', users.getUserById);
+    app.get('/api/users/email/:email', users.getUserByEmail);
 
     app.post('/api/users', users.createUser);
 
