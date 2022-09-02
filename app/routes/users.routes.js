@@ -6,7 +6,9 @@ module.exports = (app) => {
     app.get('/api/users/:id', users.getUserById);
     app.get('/api/users/email/:email', users.getUserByEmail);
 
+
     app.post('/api/users', users.createUser);
+    app.post('/api/users/login', users.login)
 
     app.put('/api/users/:id', users.updateUser);
 

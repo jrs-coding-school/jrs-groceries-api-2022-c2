@@ -173,12 +173,13 @@ INSERT INTO `grocery-shopper`.`users` (
 -- VALUES for users
 
 VALUES
-    -- Fake Will
-    ('420', 'Will@email.com', 'password1'),
+    -- passwords: 'pass'
+    -- Fake Will 
+    ('420', 'Will@email.com', '$2b$10$V3Ah7ij/LxuVcSJ5Q9krje8XdSOonXsWgnZwPZ1XpL0In.Nwnu/lW'),
     -- Fake Duncan
-    ('69', 'Duncan@email.com', 'password2'),
+    ('69', 'Duncan@email.com', '$2b$10$xHwUfXG6oQp0qK.jnq9QZenOHH9qLYzUvRXoRXqDisBK1RoDOpzOW'),
     -- Fake Ford
-    ('666', 'Ford@email.com', 'password3')
+    ('666', 'Ford@email.com', '$2b$10$uix0V2iHwBkJlRNNrqnmpem99rO5/BQ9utBvZrrlnvH3hZHN4ynyC')
 ;
 
 INSERT INTO `grocery-shopper`.`cart_items` (`customer_id`, `product_id`, `quantity`, `total`) 
