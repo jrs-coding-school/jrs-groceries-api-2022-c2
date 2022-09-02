@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./app/index');
 require('./app/routes/users.routes.js')(app);
+require('./app/routes/products.routes.js')(app);
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
