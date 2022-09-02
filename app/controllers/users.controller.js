@@ -85,6 +85,66 @@ exports.getUserByEmail = (req, res) => {
     })
 }
 
+exports.login = (req, res) => {
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        res.status(400)
+            .send({
+                message: 'Could not login. Email or password was missing.'
+            });
+        return;
+    }
+
+    const query = `
+        SELECT * FROM users 
+            WHERE email = ?;
+    `;
+    const placeholders = [email];
+
+    db.query(query, placeholders, async (err, results) => {
+
+        if (err) {
+            // case #3
+            res.status(500)
+                .send({
+                    message: "There was an error logging in. Please try again.",
+                    error: err
+                });
+            return;
+        } else if (results.length == 0) {
+            // case #2
+            res.status(404)
+                .send({
+                    message: "Email or Password was incorrect."
+                });
+            return;
+        } else {
+
+            let encryptedPassword = results[0].password;
+            const passwordMatched = await bcrypt.compare(password, encryptedPassword);
+
+            if (passwordMatched) {
+                // successful login
+
+                let user = results[0];
+
+                res.send({
+                    message: "You have successfully logged in.",
+                    user
+                });
+            } else {
+                res.status(404)
+                    .send({
+                        message: 'Email or password was incorrect'
+                    });
+            }
+        }
+    });
+
+}
+
 exports.createUser = async (req, res) => {
 
     const { email, password } = req.body
