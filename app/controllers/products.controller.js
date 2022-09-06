@@ -54,6 +54,32 @@ exports.getProductsByCategory = (req, res) => {
     })
 }
 
+exports.getFeaturedProducts = (req, res) => {
+    const script = `
+        SELECT * 
+        FROM featured_products
+        INNER JOIN products
+            ON products.id = featured_products.product_id;
+    `;
+
+    db.query(script, (err, results) => {
+        if (err) {
+            res.status(500).send({
+                error: err,
+                message: 'There was a problem finding all products, please try again'
+            })
+        } else if (results.length == 0) {
+            res.status(404).send({
+                error: err,
+                message: 'No products were found'
+            })
+        } else {
+            res.send(results)
+        }
+
+    })
+}
+
 exports.getProductsById = (req, res) => {
 
     const { id } = req.params
