@@ -15,6 +15,14 @@ CREATE TABLE `grocery-shopper`.`products` (
     PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `grocery-shopper`.`featured_products` (
+    `product_id` INT NOT NULL UNIQUE,
+    `id` VARCHAR(10) NOT NULL,
+    
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
+);
+
 
 CREATE TABLE `grocery-shopper`.`users` (
     `id` VARCHAR(50) NOT NULL UNIQUE,
@@ -194,3 +202,41 @@ VALUES
     ('666', '402', 2, 9.92),
     ('666', '1502', 1, 9.99)
     ;
+
+INSERT INTO `grocery-shopper`.`featured_products` (
+    `id`,
+    `product_id`)
+    
+
+VALUES
+
+('f101', 101),
+('f102', 105),
+('f103', 106),
+('f104', 201),
+('f105', 202),
+('f106', 203),
+('f107', 204),
+('f108', 302),
+('f109', 304),
+('f110', 401),
+('f111', 501),
+('f112', 503),
+('f113', 602),
+('f114', 603),
+('f115', 701),
+('f116', 801),
+('f117', 803),
+('f118', 901),
+('f119', 902),
+('f120', 1001),
+('f121', 1101),
+('f122', 1201),
+('f123', 1301),
+('f124', 1303),
+('f125', 1401),
+('f126', 1502),
+('f127', 1601),
+('f128', 1603)
+;
+     
