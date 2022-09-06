@@ -1,5 +1,4 @@
 const db = require('../index');
-const { v4: uuid } = require('uuid');
 
 exports.getAllProducts = (req, res) => {
     const script = `
@@ -56,7 +55,7 @@ exports.getProductsByCategory = (req, res) => {
 
 exports.getProductsById = (req, res) => {
 
-    const { id } = req.params
+    const id = req.params
 
     const script = `
         SELECT *
@@ -85,16 +84,26 @@ exports.getProductsById = (req, res) => {
 
 exports.createProduct = (req, res) => {
 
-    const { name, price, category, brand, description, image } = req.body
+    const { id, name, price, size, category, brand, description, image } = req.body
 
-    if (!name || (typeof name != 'string')) {
+    if (!id || (typeof id != 'string')) {
         res.status(400).send({
-            message: 'product name is invalid'
+            message: 'id name is invalid'
+        });
+        return;
+    } else if (!name || (typeof name != 'string')) {
+        res.status(400).send({
+            message: 'invalid name input'
         });
         return;
     } else if (!price || (typeof price != 'number')) {
         res.status(400).send({
             message: 'invalid price input'
+        });
+        return;
+    } else if (!size || (typeof size != 'string')) {
+        res.status(400).send({
+            message: 'invalid size input'
         });
         return;
     } else if (!category || (typeof category != 'string')) {
@@ -121,13 +130,12 @@ exports.createProduct = (req, res) => {
 
     const script = `
         INSERT INTO products
-            (id, name, price, category, brand, description, image)
+            (id, name, price, size, category, brand, description, image)
         VALUES
-            (?, ?, ?, ?, ?, ?, ?);
+            (?, ?, ?, ?, ?, ?, ?, ?);
     `;
-    const id = uuid();
 
-    const placeholderValues = [id, name, price, category, brand, description, image];
+    const placeholderValues = [id, name, price, size, category, brand, description, image];
 
     db.query(script, placeholderValues, (err, results) => {
         if (err || results.affectedRows == 0) {
@@ -145,8 +153,8 @@ exports.createProduct = (req, res) => {
 }
 
 exports.updateProduct = async (req, res) => {
-    const { id } = req.params
-    const { name, price, category, brand, description, image } = req.body
+    const id = req.params
+    const { name, price, size, category, brand, description, image } = req.body
 
     if (!name || (typeof name != 'string')) {
         res.status(400).send({
@@ -154,6 +162,11 @@ exports.updateProduct = async (req, res) => {
         });
         return;
     } else if (!price || (typeof price != 'number')) {
+        res.status(400).send({
+            message: 'invalid price input'
+        });
+        return;
+    } else if (!size || (typeof size != 'string')) {
         res.status(400).send({
             message: 'invalid price input'
         });
@@ -184,6 +197,7 @@ exports.updateProduct = async (req, res) => {
         UPDATE products 
         SET name = ?, 
             price = ?, 
+            size = ?,
             category = ?, 
             brand = ?, 
             description = ?, 
@@ -191,7 +205,7 @@ exports.updateProduct = async (req, res) => {
         WHERE id = ?;
     `;
 
-    const placeholderValues = [name, price, category, brand, description, image, id]
+    const placeholderValues = [name, price, size, category, brand, description, image, id]
 
     db.query(script, placeholderValues, (err, results) => {
         if (err) {
@@ -216,7 +230,7 @@ exports.updateProduct = async (req, res) => {
 
 exports.deleteProductById = (req, res) => {
 
-    let { id } = req.params
+    let id = req.params
 
     const script = `
         DELETE
