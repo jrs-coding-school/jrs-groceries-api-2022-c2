@@ -81,7 +81,7 @@ exports.getFeaturedProducts = (req, res) => {
 
 exports.getProductsById = (req, res) => {
 
-    const id = req.params
+    const { id } = req.params
 
     const script = `
         SELECT *
