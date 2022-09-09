@@ -89,7 +89,7 @@ VALUES
     
   
     -- Fruit(200)
-    (201,'Granny Smith Apple', 2.50, 'Fruit', 'Price per pound', 'FWD', 'Grown in Washington', 'https://i5.walmartimages.com/asr/bf2ec88a-2f36-41f2-93d3-c3161772733d_1.cdc913433c6acc6bf9201dc1fa86bac9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
+    (201,'Granny Smith Apple', 2.52, 'Fruit', 'Price per pound', 'FWD', 'Grown in Washington', 'https://i5.walmartimages.com/asr/bf2ec88a-2f36-41f2-93d3-c3161772733d_1.cdc913433c6acc6bf9201dc1fa86bac9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (202,'Banana', 0.39, 'Fruit', 'Price per unit', 'FWD', 'Grown in Guatemala', 'https://www.instacart.com/image-server/932x932/filters:fill(FFF,true):format(webp)/www.instacart.com/assets/domains/product-image/file/large_d85da0df-7f4a-4a8c-b066-b7bbfd871f70.jpg'),
     (203,'Navel Orange', 0.93, 'Fruit', 'Price per unit', 'FWD', 'Grown in Florida', 'https://i5.walmartimages.com/asr/9a23bac1-8817-4845-b235-36e306bd76a1_1.2f100cb67c81b17a44fedcf1f5d9f9da.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
     (204,'Strawberries, 1lb', 2.38, 'Fruit', 'Price per package', 'FWD', 'Grown in Mexico', 'https://i5.walmartimages.com/asr/4e7dab6a-c54b-48f7-9bd2-57f5d211501d_1.3ba50bfdf1c7f082056c0f5022edf182.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'),
