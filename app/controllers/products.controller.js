@@ -108,16 +108,26 @@ exports.getProductsById = (req, res) => {
     })
 }
 
-exports.getProductsByName = (req, res) => {
-    const { name } = req.params;
+exports.searchProducts = (req, res) => {
+    const { searchParam } = req.params;
 
     const script = `
-                SELECT *
-                FROM products
-                WHERE name LIKE ?
-            `
+        SELECT *
+        FROM products
+        WHERE name LIKE ?
+            OR category LIKE ?
+            OR brand LIKE ?
+            OR description LIKE ?
+    `;
 
-    const placeholderValues = `%${[name]}%`;
+    let formattedSearchValue = `%${searchParam}%`
+
+    const placeholderValues = [
+        formattedSearchValue,
+        formattedSearchValue,
+        formattedSearchValue,
+        formattedSearchValue
+    ];
 
     db.query(script, placeholderValues, (err, results) => {
         if (err) {
