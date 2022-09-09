@@ -81,7 +81,7 @@ exports.getFeaturedProducts = (req, res) => {
 
 exports.getProductsById = (req, res) => {
 
-    const { id } = req.params
+    const { id } = req.params;
 
     const script = `
         SELECT *
@@ -104,6 +104,34 @@ exports.getProductsById = (req, res) => {
             })
         } else {
             res.send(results[0])
+        }
+    })
+}
+
+exports.getProductsByName = (req, res) => {
+    const { name } = req.params;
+
+    const script = `
+                SELECT *
+                FROM products
+                WHERE name LIKE ?
+            `
+
+    const placeholderValues = `%${[name]}%`;
+
+    db.query(script, placeholderValues, (err, results) => {
+        if (err) {
+            res.status(500).send({
+                error: err,
+                message: 'There was a problem finding this product, please try again'
+            })
+        } else if (results.length == 0) {
+            res.status(404).send({
+                error: err,
+                message: 'There was no product that includes this phrase in the name, please input a valid phrase'
+            })
+        } else {
+            res.send(results)
         }
     })
 }
