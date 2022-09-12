@@ -130,10 +130,7 @@ exports.login = (req, res) => {
 
                 let user = results[0];
 
-                res.send({
-                    message: "You have successfully logged in.",
-                    user
-                });
+                res.send(user);
             } else {
                 res.status(404)
                     .send({
@@ -181,10 +178,7 @@ exports.createUser = async (req, res) => {
             });
             return;
         }
-        res.send({
-            message: "User was created successfully",
-            newUserId: id
-        });
+        this.login(req, res)
     });
 }
 
