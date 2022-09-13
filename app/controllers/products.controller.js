@@ -79,7 +79,7 @@ exports.getFeaturedProducts = (req, res) => {
     })
 }
 
-exports.getProductsById = (req, res) => {
+exports.getProductById = (req, res) => {
 
     const { id } = req.params;
 
