@@ -58,7 +58,7 @@ exports.createCartItems = (req, res) => {
 
     const { customerId, productId, quantity, total } = req.body
 
-    if (!customerId || (typeof customerId != 'number')) {
+    if (!customerId || (typeof customerId != 'string')) {
         res.status(400).send({
             message: 'Customer ID is invalid'
         });
