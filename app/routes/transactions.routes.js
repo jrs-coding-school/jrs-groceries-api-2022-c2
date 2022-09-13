@@ -7,7 +7,4 @@ module.exports = (app) => {
     app.get('/api/transactions/user/:id', transactions.getTransactionsByUserId);
 
     app.post('/api/transactions', transactions.createTransaction);
-
-    app.delete('/api/transactions/:id', transactions.deleteTransactionById);
-
 }
