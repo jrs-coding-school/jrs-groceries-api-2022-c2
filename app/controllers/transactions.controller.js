@@ -1,5 +1,6 @@
 const db = require('../index');
 const { v4: uuid } = require('uuid');
+const transactionsRoutes = require('../routes/transactions.routes');
 
 exports.getAllTransactions = (req, res) => {
     const script = `
@@ -54,6 +55,35 @@ exports.getTransactionsById = (req, res) => {
     })
 }
 
+exports.getTransactionsByUserId = (req, res) => {
+
+    const customerId = req.body
+
+    const script = `
+    SELECT *
+    FROM transactions
+    WHERE customer_id = ?
+    `
+
+    const placeholderValues = [customerId];
+
+    db.query(script, placeholderValues, (err, results) => {
+        if (err) {
+            res.status(500).send({
+                error: err,
+                message: 'There was a problem finding this customers transaction, please try again'
+            })
+        } else if (results.length == 0) {
+            res.status(404).send({
+                error: err,
+                message: 'There was no transaction at this id, please input a valid id'
+            })
+        } else {
+            res.send(results[0])
+        }
+    })
+}
+
 exports.createTransaction = async (req, res) => {
 
     const { customerId, total } = req.body
@@ -96,36 +126,4 @@ exports.createTransaction = async (req, res) => {
             newTransactionId: id
         });
     });
-}
-
-exports.deleteTransactionById = (req, res) => {
-
-    let { id } = req.params
-
-    const script = `
-        DELETE
-        FROM transactions
-        WHERE id = ?
-    `
-
-    const placeholderValues = [id];
-
-    db.query(script, placeholderValues, (err, results) => {
-        if (err) {
-            res.status(500).send({
-                error: err,
-                message: 'There was a problem deleting your transaction, please try again'
-            })
-            return;
-        } else if (results.affectedRows == 0) {
-            res.status(400).send({
-                error: err,
-                message: 'There was no transaction at this id, please enter a valid id'
-            })
-        } else {
-            res.send({
-                message: 'Transaction was successfully deleted'
-            })
-        }
-    })
 }
