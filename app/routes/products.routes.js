@@ -5,7 +5,7 @@ module.exports = (app) => {
     app.get('/api/products', products.getAllProducts);
 
     app.get('/api/products/featured', products.getFeaturedProducts);
-    app.get('/api/products/:id', products.getProductsById);
+    app.get('/api/products/:id', products.getProductById);
     app.get('/api/products/search/:searchParam', products.searchProducts)
     app.get('/api/products/category/:category', products.getProductsByCategory)
 
