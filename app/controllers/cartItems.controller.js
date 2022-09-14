@@ -25,17 +25,20 @@ exports.getAllCartItems = (req, res) => {
     })
 }
 
-exports.getCartItemsById = (req, res) => {
+exports.getCartItemsByUserId = (req, res) => {
 
-    const { id } = req.params
+    const { customerId } = req.params
 
     const script = `
-        SELECT *
-        FROM cart_items
-        WHERE id = ?
-    `
+        SELECT products.id, name, size, category, brand, description, image, quantity, total, price
+            FROM cart_items
+        INNER JOIN products 
+            ON products.id = cart_items.product_id
+        WHERE customer_id = ?
+        ORDER BY products.name;
+    `;
 
-    const placeholderValues = [id];
+    const placeholderValues = [customerId];
 
     db.query(script, placeholderValues, (err, results) => {
         if (err) {
@@ -49,7 +52,7 @@ exports.getCartItemsById = (req, res) => {
                 message: 'There was no cart item at this id, please input a valid id'
             })
         } else {
-            res.send(results[0])
+            res.send(results)
         }
     })
 }
@@ -105,16 +108,20 @@ exports.createCartItems = (req, res) => {
     });
 }
 
-exports.updateCartItemsById = async (req, res) => {
-    const { id } = req.params
-    const { quantity, total } = req.body
-
-    if (!quantity || (typeof quantity != 'string')) {
+exports.increaseItemQuantity = async (req, res) => {
+    const { customerId, productId, price } = req.body
+    console.log(req.body, !price)
+    if (!customerId || (typeof customerId != 'string')) {
         res.status(400).send({
-            message: 'quantity input is invalid'
+            message: 'customer id is invalid'
         });
         return;
-    } else if (!total || (typeof total != 'string')) {
+    } else if (!productId || (typeof productId != 'number')) {
+        res.status(400).send({
+            message: 'invalid total input'
+        });
+        return;
+    } else if (!price || (typeof price != 'number')) {
         res.status(400).send({
             message: 'invalid total input'
         });
@@ -122,12 +129,15 @@ exports.updateCartItemsById = async (req, res) => {
     }
 
     const script = `
-    UPDATE cart_items
-    SET quantity = ?, total = ?
-    WHERE id = ?;`
+        UPDATE cart_items
+        SET quantity = quantity + 1,
+            total = total + ?
+        WHERE customer_id = ?
+            AND product_id = ?
+    `;
 
 
-    const placeholderValues = [quantity, total, id]
+    const placeholderValues = [price, customerId, productId]
 
     db.query(script, placeholderValues, (err, results) => {
         if (err) {
@@ -149,17 +159,69 @@ exports.updateCartItemsById = async (req, res) => {
     })
 }
 
-exports.deleteCartItemsById = (req, res) => {
+exports.decreaseItemQuantity = async (req, res) => {
+    const { customerId, productId, price } = req.body
+    console.log(req.body, !price)
+    if (!customerId || (typeof customerId != 'string')) {
+        res.status(400).send({
+            message: 'customer id is invalid'
+        });
+        return;
+    } else if (!productId || (typeof productId != 'number')) {
+        res.status(400).send({
+            message: 'invalid total input'
+        });
+        return;
+    } else if (!price || (typeof price != 'number')) {
+        res.status(400).send({
+            message: 'invalid total input'
+        });
+        return;
+    }
 
-    let { id } = req.params
+    const script = `
+        UPDATE cart_items
+        SET quantity = quantity - 1,
+            total = total + ?
+        WHERE customer_id = ?
+            AND product_id = ?
+    `;
+
+
+    const placeholderValues = [price, customerId, productId]
+
+    db.query(script, placeholderValues, (err, results) => {
+        if (err) {
+            res.status(500).send({
+                error: err,
+                message: "There was a problem editing the cart item"
+            })
+            return
+        } else if (results.affectedRows == 0) {
+            res.status(404).send({
+                message: "No cart item was updated with that id",
+                id
+            })
+            return;
+        } else {
+            res.send(results)
+            message: "Your cart item was updated"
+        }
+    })
+}
+
+exports.removeFromCart = (req, res) => {
+
+    let { customerId, productId } = req.params
 
     const script = `
         DELETE
         FROM cart_items
-        WHERE id = ?
+        WHERE customer_id = ?
+            AND product_id = ?
     `
 
-    const placeholderValues = [id];
+    const placeholderValues = [customerId, productId];
 
     db.query(script, placeholderValues, (err, results) => {
         if (err) {
