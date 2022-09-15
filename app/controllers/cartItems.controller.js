@@ -73,8 +73,9 @@ exports.createCartItems = (req, res) => {
         return;
     } else if (!quantity || (typeof quantity != 'number')) {
         res.status(400).send({
-            message: 'Quantity input is invalid'
+            message: 'Quantity input is invalid',
         });
+        console.log(quantity, typeof quantity)
         return;
     } else if (!total || (typeof total != 'number')) {
         res.status(400).send({
