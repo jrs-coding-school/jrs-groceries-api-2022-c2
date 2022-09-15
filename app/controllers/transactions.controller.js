@@ -84,46 +84,117 @@ exports.getTransactionsByUserId = (req, res) => {
     })
 }
 
-exports.createTransaction = async (req, res) => {
+exports.createTransaction = (req, res) => {
 
-    const { customerId, total } = req.body
+    const { customerId, items, grandTotal } = req.body
 
-    if (!customerId || (typeof customerId != 'string')) {
-        res.status(400).send({
-            message: 'customerId is already in use'
-        });
-        return;
-    } else if (!total || (typeof total != 'string')) {
-        res.status(400).send({
-            message: 'total input is invalid'
-        });
-        return;
-    }
+    // if (!customerId || (typeof customerId != 'string')) {
+    //     res.status(400).send({
+    //         message: 'customerId is already in use'
+    //     });
+    //     return;
+    // } else if (!grandTotal || (typeof grandTotal != 'string')) {
+    //     res.status(400).send({
+    //         message: 'total input is invalid'
+    //     });
+    //     return;
+    // } else if (!items || !Array.isArray(items)) {
+    //     res.status(400).send({
+    //         message: 'items are invalid'
+    //     });
+    //     return;
+    // }
 
-    const id = uuid();
+    const transactionId = uuid();
 
     const script = `
+        BEGIN;
         INSERT INTO transactions
             (id, customer_id, total)
-            
         VALUES
             (?, ?, ?);
+
+        INSERT INTO purchased_items
+            (transaction_id, product_id, quantity, total)
+        VALUES
+            ?;
+
+        COMMIT;
     `;
 
-    const placeholderValues = [id, customerId, total];
-
-    db.query(script, placeholderValues, (err, results) => {
-
-        if (err || results.affectedRows == 0) {
-            res.status(500).send({
-                error: err,
-                message: 'There was an error creating the transaction. Please try again.'
-            });
-            return;
-        }
-        res.send({
-            message: "Transaction was created successfully",
-            newTransactionId: id
-        });
+    let itemsPlaceholderValues = items?.map(({ id, quantity, total }) => {
+        // [transaction_id, product_id, quantity, total]
+        return [transactionId, id, quantity, total];
     });
+    const transactionPlaceholderValues = [transactionId, customerId, grandTotal];
+
+
+    // db.query(script, placeholderValues, (err, results) => {
+
+    //     if (err || results.affectedRows == 0) {
+    //         console.log(err)
+    //         res.status(500).send({
+    //             error: err,
+    //             message: 'There was an error creating the transaction. Please try again.'
+    //         });
+    //         return;
+    //     }
+    //     res.send({
+    //         message: "Transaction was created successfully",
+    //         newTransactionId: transactionId
+    //     });
+    // });
+    try {
+        db.beginTransaction((err) => {
+            if (err) { throw err; }
+            db.query(
+                `
+                    INSERT INTO transactions
+                        (id, customer_id, total)
+                    VALUES
+                        (?, ?, ?);
+                `,
+                transactionPlaceholderValues,
+                (error, results, fields) => {
+                    if (error) {
+                        return db.rollback(function () {
+                            throw error;
+                        });
+                    }
+
+                    var log = 'Transaction ' + results.insertId + ' added';
+
+                    db.query(
+                        `
+                            INSERT INTO purchased_items
+                            (transaction_id, product_id, quantity, total)
+                            VALUES ?
+                        `,
+                        [itemsPlaceholderValues],
+                        (error, results, fields) => {
+                            if (error) {
+                                return db.rollback(function () {
+                                    throw error;
+                                });
+                            }
+                            db.commit(function (err) {
+                                if (err) {
+                                    return db.rollback(function () {
+                                        throw err;
+                                    });
+                                }
+                                res.send({
+                                    transactionId,
+                                    message: "Transaction posted successfully"
+                                })
+                            });
+                        });
+                });
+        });
+    } catch (err) {
+        res.status(400).send({
+            message: "there was a problem creating your transaction"
+        })
+    }
+
 }
