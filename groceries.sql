@@ -41,7 +41,7 @@ CREATE TABLE `grocery-shopper`.`transactions` (
 );
 
 CREATE TABLE `grocery-shopper`.`purchased_items` (
-    `id` VARCHAR(50) NOT NULL UNIQUE,
+    `id` INT NOT NULL AUTO_INCREMENT UNIQUE,
     `product_id` INT NOT NULL,
     `quantity` INT NOT NULL,
     `transaction_id` VARCHAR(50) NOT NULL,
